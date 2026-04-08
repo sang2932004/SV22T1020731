@@ -1,0 +1,29 @@
+﻿@model SV22T1020731.Models.Catalog.Product
+
+<div class="container mt-4">
+    <div class="row">
+
+        <div class="col-md-4">
+            <img src="~/images/products/@Model.Photo"
+                 class="img-fluid"
+                 onerror="this.src='/images/no-image.png'" />
+        </div>
+
+        <div class="col-md-8">
+            <h3>@Model.ProductName</h3>
+
+            <h4 class="text-danger">
+                @Model.Price.ToString("N0") đ
+            </h4>
+
+            <p>Mô tả sản phẩm demo...</p>
+
+            <a href="/Cart/Add?id=@Model.ProductID"
+               class="btn btn-success">
+                🛒 Thêm vào giỏ hàng
+            </a>
+
+        </div>
+
+    </div>
+</div>

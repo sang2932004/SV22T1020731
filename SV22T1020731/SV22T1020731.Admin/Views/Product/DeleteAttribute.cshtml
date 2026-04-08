@@ -1,0 +1,68 @@
+﻿@model ProductAttribute
+@{
+    int productId = Model?.ProductID ?? 0;
+}
+@section PageToolBar {
+    <a href="~/Product/Edit/@productId#attributes" class="btn btn-secondary">
+        <i class="bi bi-arrow-left me-1"></i>
+        Quay lại
+    </a>
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card border-danger">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-exclamation-triangle me-1"></i>
+                    Xóa thuộc tính mặt hàng
+                </h5>
+            </div>
+            <div class="card-body">
+                <form method="post" action="~/Product/DeleteAttribute/@productId?attributeId=@Model.AttributeID">
+
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-circle me-1"></i>
+                        Bạn có chắc chắn muốn xóa thuộc tính này không?
+                        Dữ liệu sau khi xóa sẽ <strong>không thể khôi phục</strong>.
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label fw-semibold">Tên thuộc tính</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" value="@Model.AttributeName" disabled />
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label fw-semibold">Giá trị</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" value="@Model.AttributeValue" disabled />
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label fw-semibold">Thứ tự hiển thị</label>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" value="@Model.DisplayOrder" disabled />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-9 offset-sm-3 text-end">
+                            <button type="submit" class="btn btn-danger">
+                                <i class="bi bi-trash me-1"></i>
+                                Xác nhận xóa
+                            </button>
+                            <a href="~/Product/Edit/@productId#attributes" class="btn btn-secondary ms-2">
+                                <i class="bi bi-arrow-left me-1"></i>
+                                Bỏ qua
+                            </a>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

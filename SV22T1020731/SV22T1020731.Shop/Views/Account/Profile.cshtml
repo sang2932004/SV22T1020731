@@ -1,0 +1,40 @@
+﻿@model SV22T1020731.Models.Partner.Customer
+
+@{
+    ViewBag.Title = "Thông tin cá nhân";
+}
+
+<div class="container mt-4">
+    <div class="card p-4 shadow" style="max-width:600px;margin:auto;">
+        <h3 class="mb-3">👤 Thông tin cá nhân</h3>
+
+        @if (ViewBag.Success != null)
+        {
+            <div class="alert alert-success">@ViewBag.Success</div>
+        }
+
+        <form method="post">
+            <div class="mb-3">
+                <label>Tên</label>
+                <input asp-for="CustomerName" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label>Email</label>
+                <input asp-for="Email" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label>Điện thoại</label>
+                <input asp-for="Phone" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label>Địa chỉ</label>
+                <input asp-for="Address" class="form-control" />
+            </div>
+
+            <button class="btn btn-primary w-100">Lưu thay đổi</button>
+        </form>
+    </div>
+</div>

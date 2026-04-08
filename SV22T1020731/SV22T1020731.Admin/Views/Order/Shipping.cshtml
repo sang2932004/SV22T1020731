@@ -1,0 +1,59 @@
+@model OrderViewInfo
+@{
+    Layout = null;
+    var shippers = ViewBag.Shippers as SV22T1020731.Models.Common.PagedResult<SV22T1020731.Models.Partner.Shipper>;
+}
+<form method="post" action="~/Order/Shipping/@Model.OrderID">
+    <div class="modal-header text-bg-info">
+        <strong class="modal-title">
+            <i class="bi bi-truck me-1"></i>
+            Chuyển giao hàng
+        </strong>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+    </div>
+
+    <div class="modal-body">
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                @foreach (var err in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <div>@err.ErrorMessage</div>
+                }
+            </div>
+        }
+        <div class="alert alert-info d-flex align-items-center mb-3">
+            <i class="bi bi-info-circle me-2 fs-5"></i>
+            <div>
+                Chọn người giao hàng cho đơn hàng <strong>#@Model.OrderID</strong>.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold">Người giao hàng <span class="text-danger">*</span></label>
+            <select name="shipperID" class="form-select" required>
+                <option value="0">-- Chọn người giao hàng --</option>
+                @if (shippers != null)
+                {
+                    @foreach (var s in shippers.DataItems)
+                    {
+                        <option value="@s.ShipperID">@s.ShipperName — @s.Phone</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="row g-2 text-muted small">
+            <div class="col-6"><span class="fw-bold">Khách hàng:</span> @(string.IsNullOrEmpty(Model.CustomerName) ? "Khách lẻ" : Model.CustomerName)</div>
+            <div class="col-6"><span class="fw-bold">Địa chỉ:</span> @Model.DeliveryAddress</div>
+            <div class="col-6"><span class="fw-bold">Tỉnh/thành:</span> @Model.DeliveryProvince</div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-info text-white">
+            <i class="bi bi-truck me-1"></i> Xác nhận giao hàng
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Đóng
+        </button>
+    </div>
+</form>

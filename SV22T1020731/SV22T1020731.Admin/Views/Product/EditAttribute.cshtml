@@ -1,0 +1,67 @@
+﻿@model ProductAttribute
+@{
+    int productId = Model?.ProductID ?? 0;
+}
+@section PageToolBar {
+    <button type="submit" form="formEditAttribute" class="btn btn-primary">
+        <i class="bi bi-save me-1"></i>
+        Lưu thuộc tính
+    </button>
+    <a href="~/Product/Edit/@productId#attributes" class="btn btn-secondary ms-1">
+        <i class="bi bi-arrow-left me-1"></i>
+        Quay lại
+    </a>
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card card-outline card-success">
+            <div class="card-header">
+                <h5 class="mb-0">@ViewBag.Title</h5>
+            </div>
+            <div class="card-body">
+                @Html.ValidationMessage("error", new { @class = "text-danger" })
+                <form id="formEditAttribute" method="post" action="~/Product/SaveAttribute">
+
+                    <input type="hidden" asp-for="AttributeID" />
+                    <input type="hidden" asp-for="ProductID" />
+
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label fw-semibold">
+                            Tên thuộc tính <span class="text-danger">*</span>
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" asp-for="AttributeName"
+                                   class="form-control"
+                                   placeholder="Ví dụ: Màu sắc, Kích thước, Chất liệu..."
+                                   autofocus />
+                            <span asp-validation-for="AttributeName" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label fw-semibold">
+                            Giá trị <span class="text-danger">*</span>
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" asp-for="AttributeValue"
+                                   class="form-control"
+                                   placeholder="Ví dụ: Đỏ, XL, Cotton..." />
+                            <span asp-validation-for="AttributeValue" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label fw-semibold">Thứ tự hiển thị</label>
+                        <div class="col-sm-3">
+                            <input type="number" asp-for="DisplayOrder"
+                                   class="form-control"
+                                   min="1" />
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+﻿@model SV22T1020731.Models.Catalog.Product
+
+<h2>@Model.ProductName</h2>
+
+<img src="~/images/products/@Model.Photo" width="300" />
+
+<p>@Model.ProductDescription</p>
+<p><b>Giá:</b> @Model.Price.ToString("N0") đ</p>
+
+<a href="/Cart/Add/@Model.ProductID" class="btn btn-success">Thêm vào giỏ</a>

@@ -1,0 +1,101 @@
+﻿@model List<SV22T1020731.Models.Catalog.Product>
+
+@{
+    int categoryId = 0;
+    int.TryParse(Context.Request.Query["categoryId"], out categoryId);
+
+    string searchValue = Context.Request.Query["searchValue"];
+    string minPrice = Context.Request.Query["minPrice"];
+    string maxPrice = Context.Request.Query["maxPrice"];
+}
+
+<div class="container mt-4">
+    <h3>🛍 Sản phẩm</h3>
+
+    <!-- 🔍 FORM -->
+    <form method="get" class="row mb-4">
+
+        <!-- tên -->
+        <div class="col-md-3">
+            <input name="searchValue"
+                   value="@searchValue"
+                   class="form-control"
+                   placeholder="🔍 Tên sản phẩm..." />
+        </div>
+
+        <!-- loại -->
+        <div class="col-md-2">
+            <select name="categoryId" class="form-control">
+                <option value="0">-- Loại --</option>
+                <option value="1" selected="@(categoryId == 1)">Áo</option>
+                <option value="2" selected="@(categoryId == 2)">Quần</option>
+                <option value="3" selected="@(categoryId == 3)">Giày</option>
+            </select>
+        </div>
+
+        <!-- giá -->
+        <div class="col-md-2">
+            <input name="minPrice"
+                   value="@minPrice"
+                   class="form-control"
+                   placeholder="Giá từ" />
+        </div>
+
+        <div class="col-md-2">
+            <input name="maxPrice"
+                   value="@maxPrice"
+                   class="form-control"
+                   placeholder="Đến" />
+        </div>
+
+        <div class="col-md-2">
+            <button class="btn btn-primary w-100">🔍 Tìm</button>
+        </div>
+
+    </form>
+
+    <!-- 📦 LIST -->
+    <div class="row">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var p in Model)
+            {
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100 text-center shadow-sm">
+
+                        <img src="~/images/products/@p.Photo"
+                             style="height:180px;object-fit:cover"
+                             onerror="this.src='/images/no-image.png'" />
+
+                        <div class="card-body">
+                            <h6>@p.ProductName</h6>
+
+                            <div class="text-danger fw-bold">
+                                @p.Price.ToString("N0") đ
+                            </div>
+
+                            <div class="mt-2">
+                                <a href="/Product/Details/@p.ProductID"
+                                   class="btn btn-sm btn-outline-primary">
+                                    👁 Xem
+                                </a>
+
+                                <a href="/Cart/Add?id=@p.ProductID"
+                                   class="btn btn-sm btn-danger">
+                                    🛒
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="text-center text-muted">
+                Không có sản phẩm
+            </div>
+        }
+    </div>
+</div>

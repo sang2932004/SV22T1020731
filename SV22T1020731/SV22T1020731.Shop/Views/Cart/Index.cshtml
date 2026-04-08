@@ -1,0 +1,68 @@
+﻿@model List<SV22T1020731.Models.Sales.OrderDetail>
+
+<div class="container mt-4">
+    <h3>🛒 Giỏ hàng</h3>
+
+    @if (Model == null || Model.Count == 0)
+    {
+        <div class="alert alert-warning">
+            Giỏ hàng trống
+        </div>
+    }
+    else
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Số lượng</th>
+                    <th>Giá</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ProductID</td>
+
+                        <td>
+                            <form action="/Cart/Update">
+                                <input type="hidden" name="id" value="@item.ProductID" />
+
+                                <input type="number"
+                                       name="quantity"
+                                       value="@item.Quantity"
+                                       min="1"
+                                       class="form-control" />
+
+                                <button class="btn btn-sm btn-primary mt-1">
+                                    Cập nhật
+                                </button>
+                            </form>
+                        </td>
+
+                        <td>@item.SalePrice</td>
+
+                        <td>
+                            <a href="/Cart/Remove?id=@item.ProductID"
+                               class="btn btn-danger btn-sm">
+                                Xóa
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+        <a href="/Cart/Clear" class="btn btn-warning">
+            Xóa giỏ
+        </a>
+
+        <a href="/Order/Create" class="btn btn-success">
+            Đặt hàng
+        </a>
+    }
+</div>

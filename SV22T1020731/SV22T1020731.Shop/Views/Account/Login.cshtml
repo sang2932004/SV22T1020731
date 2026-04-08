@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+    ViewBag.Title = "Đăng nhập";
+}
+
+<div class="auth-card">
+
+    <h3 class="text-center mb-3">🔐 Đăng nhập</h3>
+
+    <form method="post">
+        <div class="mb-3">
+            <label>Email</label>
+            <input name="Email" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Mật khẩu</label>
+            <input type="password" name="Password" class="form-control" />
+        </div>
+
+        <button class="btn btn-primary w-100">Đăng nhập</button>
+    </form>
+
+    <div class="text-center mt-3">
+        Chưa có tài khoản?
+        <a href="/Account/Register">Đăng ký</a>
+    </div>
+</div>

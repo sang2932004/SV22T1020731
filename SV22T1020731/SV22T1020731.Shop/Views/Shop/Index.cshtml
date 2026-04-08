@@ -1,0 +1,21 @@
+﻿@model IEnumerable<SV22T1020731.Models.Catalog.Product>
+
+<h2>Sản phẩm</h2>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3">
+            <div class="card mb-3">
+                <img src="~/images/products/@item.Photo" class="card-img-top" />
+                <div class="card-body">
+                    <h6>@item.ProductName</h6>
+                    <p>@item.Price.ToString("N0") đ</p>
+
+                    <a href="/Shop/Detail/@item.ProductID" class="btn btn-sm btn-info">Chi tiết</a>
+                    <a href="/Cart/Add/@item.ProductID" class="btn btn-sm btn-success">Thêm</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

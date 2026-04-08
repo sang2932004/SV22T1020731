@@ -1,0 +1,20 @@
+﻿@model IEnumerable<SV22T1020731.Models.Sales.Order>
+
+<h2>Đơn hàng của tôi</h2>
+
+<table class="table">
+    <tr>
+        <th>Mã đơn</th>
+        <th>Ngày</th>
+        <th>Trạng thái</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.OrderID</td>
+            <td>@item.OrderTime</td>
+            <td>@item.Status</td>
+        </tr>
+    }
+</table>
